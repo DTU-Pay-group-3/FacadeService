@@ -1,0 +1,6 @@
+version: '3'
+services:
+  facade-service:
+    image: facade-service
+    build: .
+ 
