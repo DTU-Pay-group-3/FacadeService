@@ -1,4 +1,4 @@
-package merchant.service;
+package utils;
 
 import dtupay.service.DTUPayService;
 import messaging.implementations.RabbitMqQueue;

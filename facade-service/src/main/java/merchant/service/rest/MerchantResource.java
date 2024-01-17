@@ -2,7 +2,7 @@ package merchant.service.rest;
 
 import dtupay.service.AccountManagementService;
 import merchant.service.Merchant;
-import merchant.service.ServiceFactory;
+import utils.ServiceFactory;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
