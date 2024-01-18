@@ -83,6 +83,6 @@ public class PaymentSteps {
     @Then("the payment is registered and the money is received")
     public void thePaymentIsRegisteredAndTheMoneyIsReceived() {
         String result=paymentCompleted.join();
-        assertEquals(result,payment.getPaymentId());
+        assertEquals(result,payment.getPaymentId()+" Completed Successfully");
     }
 }
