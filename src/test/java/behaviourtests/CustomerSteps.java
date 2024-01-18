@@ -12,6 +12,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class CustomerSteps {
     private CompletableFuture<Event> publishedEvent = new CompletableFuture<>();
@@ -56,8 +57,19 @@ public class CustomerSteps {
         service.handleAccountCreated(new Event("..", new Object[] {this.account}));
     }
 
+    @When("the {string} event is returned with an empty response")
+    public void theEventIsReturnedWithAnEmptyResponse(String eventName) {
+        service.handleAccountCreated(new Event("..", new Object[] { new DTUPayAccount() }));
+    }
+
     @Then("a customer with the same information as the bank customer exists in DTUPay")
     public void aCustomerWithTheSameInformationAsTheBankCustomerExistsInDTUPay() {
         assertEquals(this.account, this.registeredAccount.join());
     }
+
+    @Then("a customer is not created")
+    public void aCustomerIsNotCreated() {
+        assertNotEquals(this.account, this.registeredAccount.join());
+    }
+
 }

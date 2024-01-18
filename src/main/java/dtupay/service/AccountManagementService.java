@@ -15,6 +15,7 @@ public class AccountManagementService {
     public AccountManagementService(MessageQueue q){
         this.queue = q;
         this.queue.addHandler("AccountCreated", this::handleRegistrationCompleted);
+        this.queue.addHandler("AccountAlreadyExists", this::handleAccountAlreadyExists);
     }
 
     public DTUPayAccount register(DTUPayAccount account){
@@ -28,5 +29,11 @@ public class AccountManagementService {
         System.out.println("Event received MerchantAssigned " + event);
         var s = event.getArgument(0, DTUPayAccount.class);
         registeredMerchant.complete(s);
+    }
+
+    public void handleAccountAlreadyExists(Event event) {
+        System.out.println("Event received AccountAlreadyExists");
+        var a = event.getArgument(0, DTUPayAccount.class);
+        registeredMerchant.complete(a);
     }
 }
