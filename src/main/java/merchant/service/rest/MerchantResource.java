@@ -1,5 +1,6 @@
 package merchant.service.rest;
 
+import customer.service.DTUPayAccount;
 import dtupay.service.AccountManagementService;
 import merchant.service.Merchant;
 import utils.ServiceFactory;
@@ -15,8 +16,8 @@ public class MerchantResource {
 	@POST
 	@Path("/register")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Merchant registerMerchant(Merchant merchant){
-		return accountService.register(merchant);
+	public DTUPayAccount registerMerchant(DTUPayAccount account){
+		return accountService.register(account);
 	}
 
 	@POST

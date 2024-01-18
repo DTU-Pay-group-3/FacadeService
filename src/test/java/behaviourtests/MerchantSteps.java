@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
+import customer.service.DTUPayAccount;
 import dtupay.service.AccountManagementService;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -18,7 +19,7 @@ import messaging.MessageQueue;
 public class MerchantSteps {
 
 	private CompletableFuture<Event> publishedEvent = new CompletableFuture<>();
-	Merchant merchant;
+	DTUPayAccount merchantAccount;
 
 	private MessageQueue q = new MessageQueue() {
 
@@ -33,11 +34,11 @@ public class MerchantSteps {
 		
 	};
 	AccountManagementService accountService= new AccountManagementService(q);
-	private CompletableFuture<Merchant> registeredMerchant = new CompletableFuture<>();
+	private CompletableFuture<DTUPayAccount> registeredMerchantAccount = new CompletableFuture<>();
 
 	@Given("there is a merchant with a bank account")
 	public void thereIsAMerchantWithABankAccount() {
-		merchant = new Merchant("BkA1","ZZZZ",500);
+		merchantAccount = new DTUPayAccount("Bob","Bname", "3322119999","54321");
 	}
 
 	@When("the merchant is being registered")
@@ -46,22 +47,22 @@ public class MerchantSteps {
 		// the register method will only finish after the next @When
 		// step is executed.
 		new Thread(() -> {
-			var result = accountService.register(merchant);
-			registeredMerchant.complete(result);
+			var result = accountService.register(merchantAccount);
+			registeredMerchantAccount.complete(result);
 		}).start();
 	}
 
 	@Then("the {string} event is sent")
 	public void theEventIsSent(String string) {
-		Event event = new Event(string, new Object[] { merchant });
+		Event event = new Event(string, new Object[] { merchantAccount });
 		assertEquals(event,publishedEvent.join());
 	}
 
 	@When("the {string} event is sent with non-empty id")
 	public void theEventIsSentWithNonEmptyId(String string) {
 		// This step simulate the event created by a downstream service.
-		var c = new Merchant();
-		accountService.handleRegistrationCompleted(new Event("..",new Object[] {c}));
+		var acc = new DTUPayAccount();
+		accountService.handleRegistrationCompleted(new Event("..",new Object[] {acc}));
 	}
 
 
@@ -69,6 +70,6 @@ public class MerchantSteps {
 
     @Then("the merchant is registered and his id is set")
     public void theMerchantIsRegisteredAndHisIdIsSet() {
-		assertNotNull(registeredMerchant.join());
+		assertNotNull(registeredMerchantAccount.join());
     }
 }
