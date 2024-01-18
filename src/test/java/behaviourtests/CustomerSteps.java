@@ -59,7 +59,8 @@ public class CustomerSteps {
 
     @When("the {string} event is returned with an empty response")
     public void theEventIsReturnedWithAnEmptyResponse(String eventName) {
-        service.handleAccountCreated(new Event("..", new Object[] { new DTUPayAccount("", "", "", "") }));
+        this.result = new DTUPayAccount("", "", "", "");
+        service.handleAccountCreated(new Event("..", new Object[] { this.result }));
     }
 
     @Then("a customer with the same information as the bank customer exists in DTUPay")
@@ -69,7 +70,7 @@ public class CustomerSteps {
 
     @Then("a customer is not created")
     public void aCustomerIsNotCreated() {
-        assertNotEquals(this.account, this.registeredAccount.join());
+        assertEquals(this.result, this.registeredAccount.join());
     }
 
 }
