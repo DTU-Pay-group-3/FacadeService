@@ -59,7 +59,7 @@ public class CustomerSteps {
 
     @When("the {string} event is returned with an empty response")
     public void theEventIsReturnedWithAnEmptyResponse(String eventName) {
-        service.handleAccountCreated(new Event("..", new Object[] { new DTUPayAccount() }));
+        service.handleAccountCreated(new Event("..", new Object[] { new DTUPayAccount("", "", "", "") }));
     }
 
     @Then("a customer with the same information as the bank customer exists in DTUPay")
