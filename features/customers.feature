@@ -10,5 +10,5 @@ Feature: Account service features
     Given a customer with a bank account
     When the customer registers with DTUPay
     Then the "RegisterAccountRequested" event is sent to the service
-    When the "AccountCreated" event is returned with an empty response
+    When the "AccountAlreadyExists" event is returned with an empty response
     Then a customer is not created
