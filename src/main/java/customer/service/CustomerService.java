@@ -13,7 +13,7 @@ public class CustomerService {
     public CustomerService(MessageQueue q) {
         queue = q;
         queue.addHandler("AccountCreated", this::handleAccountCreated);
-        queue.addHandler("AccountReturned", this::handleAccountReturned);
+        queue.addHandler("DTUPayAccountReturned", this::handleAccountReturned);
     }
 
     public DTUPayAccount register(DTUPayAccount account) {
@@ -31,7 +31,7 @@ public class CustomerService {
 
     public DTUPayAccount getAccount(String id) {
         returnedAccount = new CompletableFuture<>();
-        Event event = new Event("GetAccountRequested", new Object[] { id });
+        Event event = new Event("GetDTUPayAccount", new Object[] { id });
         queue.publish(event);
         return returnedAccount.join();
     }
