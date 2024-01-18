@@ -31,12 +31,13 @@ public class PaymentService {
     public void handlePaymentSuccess(Event e) {
         var s = e.getArgument(0, String.class);
         var correlationid = e.getArgument(1, CorrelationId.class);
-        correlations.get(correlationid).complete(s);
+        correlations.get(correlationid).complete(s+" Completed Successfully");
     }
 
     public void handlePaymentFail(Event e) {
         var s = e.getArgument(0, String.class);
         var correlationid = e.getArgument(1, CorrelationId.class);
-        correlations.get(correlationid).cancel(true);
+        correlations.get(correlationid).complete(s+" Failed");
+//        correlations.get(correlationid).cancel(true);
     }
 }

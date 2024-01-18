@@ -76,13 +76,13 @@ public class PaymentSteps {
 
     @When("the {string} event is sent with PaymentGood")
     public void theEventIsSentWithPaymentGood(String arg0) {
-        Event event = new Event(arg0, new Object[] { "PaymentGood-"+payment.getPaymentId(), correlationIds.get(payment.getPaymentId()) });
+        Event event = new Event(arg0, new Object[] { payment.getPaymentId(), correlationIds.get(payment.getPaymentId()) });
         service.handlePaymentSuccess(event);
     }
 
     @Then("the payment is registered and the money is received")
     public void thePaymentIsRegisteredAndTheMoneyIsReceived() {
         String result=paymentCompleted.join();
-        assertEquals(result,"PaymentGood-"+payment.getPaymentId());
+        assertEquals(result,payment.getPaymentId());
     }
 }
