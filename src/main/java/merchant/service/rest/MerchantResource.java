@@ -2,7 +2,9 @@ package merchant.service.rest;
 
 import customer.service.DTUPayAccount;
 import dtupay.service.AccountManagementService;
+import dtupay.service.PaymentService;
 import merchant.service.Merchant;
+import utils.Payment;
 import utils.ServiceFactory;
 
 import javax.ws.rs.*;
@@ -12,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 public class MerchantResource {
 
 	AccountManagementService accountService = new ServiceFactory().getService().getAccountManagementService();
+	PaymentService paymentService = new ServiceFactory().getService().getPaymentService();
 
 	@POST
 	@Path("/register")
@@ -40,8 +43,8 @@ public class MerchantResource {
 	@POST
 	@Path("/pay")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String pay(){
+	public String pay(Payment payment){
 		//send payment object
-		return "Empty method";
+		return paymentService.makePayment(payment);
 	}
 }
