@@ -14,7 +14,6 @@ import dtupay.service.AccountManagementService;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import merchant.service.Merchant;
 import messaging.Event;
 import messaging.MessageQueue;
 

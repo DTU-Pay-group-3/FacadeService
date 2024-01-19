@@ -7,7 +7,7 @@ import utils.ServiceFactory;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
-@Path("/accounts")
+@Path("/customers")
 public class CustomerResource {
     // Services
     CustomerService customerService = new ServiceFactory().getService().getCustomerService();

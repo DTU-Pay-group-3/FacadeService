@@ -3,7 +3,6 @@ package merchant.service.rest;
 import customer.service.DTUPayAccount;
 import dtupay.service.AccountManagementService;
 import dtupay.service.PaymentService;
-import merchant.service.Merchant;
 import utils.Payment;
 import utils.ServiceFactory;
 
