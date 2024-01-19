@@ -17,14 +17,12 @@ public class MerchantResource {
 
 	@POST
 	@Path("/register")
-	@Consumes(MediaType.APPLICATION_JSON)
 	public DTUPayAccount registerMerchant(DTUPayAccount account){
 		return accountService.register(account);
 	}
 
 	@POST
 	@Path("/unregister")
-	@Consumes(MediaType.APPLICATION_JSON)
 	public String unregisterMerchant(){
 		//send merchant id
 		return null;
@@ -32,7 +30,6 @@ public class MerchantResource {
 
 	@POST
 	@Path("/report")
-	@Consumes(MediaType.APPLICATION_JSON)
 	public String requestReport(String id){
 		//send merchant id
 		return "Empty method";
@@ -41,7 +38,6 @@ public class MerchantResource {
 
 	@POST
 	@Path("/pay")
-	@Consumes(MediaType.APPLICATION_JSON)
 	public String pay(Payment payment){
 		//send payment object
 		return paymentService.makePayment(payment);
