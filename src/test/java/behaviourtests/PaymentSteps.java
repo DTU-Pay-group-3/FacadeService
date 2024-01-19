@@ -20,7 +20,8 @@ import java.util.function.Consumer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-/*Author Marian s233481 and Sandra s233484*/
+/*Author Marian s233481*/
+/*Author Sandra s233484*/
 public class PaymentSteps {
 
     private Map<Payment, CompletableFuture<Event>> publishedEvents = new HashMap<>();
@@ -45,19 +46,21 @@ public class PaymentSteps {
     private String customerToken;
     private Map<String, CorrelationId> correlationIds = new HashMap<>();
 
-
+    /*Author Sandra s233484*/
     @Given("there is a merchant and a customer with DTUPay accounts")
     public void thereIsAMerchantAndACustomerWithDTUPayAccounts() {
         customerToken="token1";
         merchant=new DTUPayAccount("Bob","Builder","1212121","fdiogu-324dsff-32r32dfew");
     }
 
+    /*Author Sandra s233484*/
     @And("the merchant wants to request a payment")
     public void theMerchantWantsTo() {
         payment=new Payment(UUID.randomUUID().toString(),merchant.getId(),customerToken,"PaymentDesc1", BigDecimal.valueOf(100));
         publishedEvents.put(payment, new CompletableFuture<Event>());
     }
 
+    /*Author Sandra s233484*/
     @When("the payment is being processed")
     public void thePaymentIsBeingProcessed() {
         new Thread(() -> {
@@ -66,6 +69,7 @@ public class PaymentSteps {
         }).start();
     }
 
+    /*Author Marian s233481*/
     @Then("the {string} event is published")
     public void theEventIsPublished(String arg0) {
         Event event = publishedEvents.get(payment).join();
@@ -74,12 +78,14 @@ public class PaymentSteps {
         correlationIds.put(st.getPaymentId(), correlationId);
     }
 
+    /*Author Marian s233481*/
     @When("the {string} event is sent with PaymentGood")
     public void theEventIsSentWithPaymentGood(String arg0) {
         Event event = new Event(arg0, new Object[] { payment.getPaymentId(), correlationIds.get(payment.getPaymentId()) });
         service.handlePaymentSuccess(event);
     }
 
+    /*Author Marian s233481*/
     @Then("the payment is registered and the money is received")
     public void thePaymentIsRegisteredAndTheMoneyIsReceived() {
         String result=paymentCompleted.join();
