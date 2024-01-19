@@ -3,11 +3,11 @@ package merchant.service.rest;
 import customer.service.DTUPayAccount;
 import dtupay.service.AccountManagementService;
 import dtupay.service.PaymentService;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
 import utils.Payment;
 import utils.ServiceFactory;
 
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
 
 @Path("/merchant")
 public class MerchantResource {
