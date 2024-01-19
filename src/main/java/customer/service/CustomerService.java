@@ -14,6 +14,7 @@ public class CustomerService {
         queue = q;
         queue.addHandler("AccountCreated", this::handleAccountCreated);
         queue.addHandler("DTUPayAccountReturned", this::handleAccountReturned);
+        queue.addHandler("AccountAlreadyExists", this::handleAccountAlreadyExists);
     }
 
     public DTUPayAccount register(DTUPayAccount account) {
@@ -25,6 +26,12 @@ public class CustomerService {
 
     public DTUPayAccount handleAccountCreated(Event ev) {
         var a = ev.getArgument(0, DTUPayAccount.class);
+        registeredAccount.complete(a);
+        return a;
+    }
+
+    private DTUPayAccount handleAccountAlreadyExists(Event event) {
+        var a = event.getArgument(0, DTUPayAccount.class);
         registeredAccount.complete(a);
         return a;
     }
