@@ -11,6 +11,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
+//@Author: Caroline
 @Path("/merchant")
 public class MerchantResource {
 

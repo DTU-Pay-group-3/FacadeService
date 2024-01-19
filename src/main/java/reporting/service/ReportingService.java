@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
+//@Author: Jacob
 public class ReportingService {
 
 	private MessageQueue queue;

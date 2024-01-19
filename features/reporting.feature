@@ -1,5 +1,5 @@
 Feature: Report generation feature
-
+#Author: Caroline
 	Scenario: Generate report for customer
 		Given there is a customer with id "1122330000"
 		And there is a merchant with id "3322119999"

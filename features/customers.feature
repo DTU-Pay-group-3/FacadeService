@@ -1,4 +1,5 @@
 Feature: Account service features
+  #Author: Andreas
   Scenario: Successfully register customer
     Given a customer with a bank account
     When the customer registers with DTUPay

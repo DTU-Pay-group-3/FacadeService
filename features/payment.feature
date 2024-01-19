@@ -1,4 +1,5 @@
 Feature: Merchant Payment
+  #Authors: Marian, Sandra
   Scenario: Merchant requests payment
     Given there is a merchant and a customer with DTUPay accounts
     And the merchant wants to request a payment

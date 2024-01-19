@@ -17,6 +17,7 @@ import java.util.function.Consumer;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+//@Author: Caroline
 public class ReportingSteps {
     private CompletableFuture<Event> publishedEvent = new CompletableFuture<>();
 

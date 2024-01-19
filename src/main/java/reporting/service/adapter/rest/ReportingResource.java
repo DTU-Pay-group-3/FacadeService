@@ -9,6 +9,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import java.util.List;
 
+//@Author: Andreas
 @Path("/reports")
 public class ReportingResource {
 	ReportingService service = new ServiceFactory().getService().getReportingService();

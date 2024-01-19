@@ -6,6 +6,7 @@ import messaging.MessageQueue;
 
 import java.util.concurrent.CompletableFuture;
 
+//@Author: Andreas
 public class AccountManagementService {
     private MessageQueue queue;
     private CompletableFuture<DTUPayAccount> registeredAccount;
