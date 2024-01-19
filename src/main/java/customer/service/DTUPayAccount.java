@@ -2,12 +2,15 @@ package customer.service;
 
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Objects;
 import java.util.UUID;
 
 @Data
 @Getter
+@Setter
 public class DTUPayAccount {
 
     private String id;
@@ -19,43 +22,11 @@ public class DTUPayAccount {
     }
 
     public DTUPayAccount(String firstName, String lastName, String cprNumber, String accountNumber) {
-        this.id = UUID.randomUUID().toString();
+        this.id = "";
         this.firstName = firstName;
         this.lastName = lastName;
         this.cprNumber = cprNumber;
         this.accountNumber = accountNumber;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setCprNumber(String cprNumber) {
-        this.cprNumber = cprNumber;
-    }
-
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        DTUPayAccount that = (DTUPayAccount) o;
-        return Objects.equals(id, that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }
