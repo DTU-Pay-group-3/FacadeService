@@ -3,10 +3,13 @@ package customer.service.rest;
 import customer.service.DTUPayAccount;
 import customer.service.CustomerService;
 import dtupay.service.TokenService;
-import jakarta.ws.rs.*;
+
 import utils.ServiceFactory;
 
-import static jakarta.ws.rs.core.MediaType.APPLICATION_JSON;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 
 @Path("/customers")
 public class CustomerResource {
@@ -16,15 +19,11 @@ public class CustomerResource {
 
     @GET
     @Path("/{id}")
-    @Consumes(APPLICATION_JSON)
-    @Produces(APPLICATION_JSON)
     public DTUPayAccount getAccount(@PathParam("id") String id) {
         return customerService.getAccount(id);
     }
 
     @POST
-    @Consumes(APPLICATION_JSON)
-    @Produces(APPLICATION_JSON)
     public DTUPayAccount registerAccount(DTUPayAccount account) {
         return customerService.register(account);
     }

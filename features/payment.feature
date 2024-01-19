@@ -1,7 +1,7 @@
 Feature: Merchant Payment
   Scenario: Merchant requests payment
     Given there is a merchant and a customer with DTUPay accounts
-    And the merchant wants to
+    And the merchant wants to request a payment
     When the payment is being processed
     Then the "PaymentRequest" event is published
     When the "PaymentCompleted" event is sent with PaymentGood

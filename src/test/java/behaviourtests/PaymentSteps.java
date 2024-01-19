@@ -51,7 +51,7 @@ public class PaymentSteps {
         merchant=new DTUPayAccount("Bob","Builder","1212121","fdiogu-324dsff-32r32dfew");
     }
 
-    @And("the merchant wants to")
+    @And("the merchant wants to request a payment")
     public void theMerchantWantsTo() {
         payment=new Payment(UUID.randomUUID().toString(),merchant.getId(),customerToken,"PaymentDesc1", BigDecimal.valueOf(100));
         publishedEvents.put(payment, new CompletableFuture<Event>());
