@@ -14,7 +14,7 @@ public class AccountManagementService {
     public AccountManagementService(MessageQueue q){
         this.queue = q;
         this.queue.addHandler("AccountCreated", this::handleRegistrationCompleted);
-        this.queue.addHandler("AccountAlreadyExists", this::handleAccountAlreadyExists);
+        this.queue.addHandler("DTUPayAccountReturned", this::handleAccountAlreadyExists);
     }
 
     public DTUPayAccount register(DTUPayAccount account){
