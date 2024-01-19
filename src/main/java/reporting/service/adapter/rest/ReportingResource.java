@@ -1,15 +1,14 @@
 package reporting.service.adapter.rest;
 
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.core.MediaType;
 import utils.ServiceFactory;
 import reporting.service.LoggedTransaction;
 import reporting.service.ReportingService;
 
 import java.util.List;
+
+import javax.ws.rs.*;
+
+import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
 @Path("/reports")
 public class ReportingResource {
@@ -18,7 +17,7 @@ public class ReportingResource {
 	//GET Reports as customer
 	@GET
 	@Path("/customer/{customerId}")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(APPLICATION_JSON)
 	public List<LoggedTransaction> getReportsCustomer(@PathParam("customerId") String customerId) {
 		return service.getReportsCustomer(customerId);
 	}
@@ -26,7 +25,7 @@ public class ReportingResource {
 	//GET Reports as merchant
 	@GET
 	@Path("/merchant/{merchantId}")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(APPLICATION_JSON)
 	public List<LoggedTransaction> getReportsMerchant(@PathParam("merchantId") String merchantId) {
 		return service.getReportsMerchant(merchantId);
 	}
@@ -34,7 +33,7 @@ public class ReportingResource {
 	//GET Reports as manager
 	@GET
 	@Path("/manager")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(APPLICATION_JSON)
 	public List<LoggedTransaction> getReportsManager() {
 		return service.getReportsManager();
 	}
