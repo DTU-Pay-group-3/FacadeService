@@ -16,6 +16,7 @@ public class AccountManagementService {
         queue.addHandler("AccountCreated", this::handleAccountCreated);
         queue.addHandler("DTUPayAccountReturned", this::handleAccountReturned);
         queue.addHandler("AccountAlreadyExists", this::handleAccountAlreadyExists);
+        queue.addHandler("DTUPayAccountNotFound", this::handleAccountNotFound);
     }
 
     public DTUPayAccount register(DTUPayAccount account) {
@@ -42,6 +43,12 @@ public class AccountManagementService {
         Event event = new Event("GetDTUPayAccount", new Object[] { id });
         queue.publish(event);
         return returnedAccount.join();
+    }
+
+    public DTUPayAccount handleAccountNotFound(Event event) {
+        var a = event.getArgument(0, DTUPayAccount.class);
+        returnedAccount.complete(a);
+        return a;
     }
 
     public DTUPayAccount handleAccountReturned(Event ev) {

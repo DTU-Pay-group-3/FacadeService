@@ -31,6 +31,7 @@ public class CustomerSteps {
     private AccountManagementService service = new AccountManagementService(q);
     private DTUPayAccount account, result;
     private CompletableFuture<DTUPayAccount> registeredAccount = new CompletableFuture<>();
+    private CompletableFuture<DTUPayAccount> getAccount = new CompletableFuture<>();
 
     @Given("a customer with a bank account")
     public void aCustomerWithABankAccount() {
@@ -72,4 +73,34 @@ public class CustomerSteps {
         assertEquals(this.result, this.registeredAccount.join());
     }
 
+    @When("an actor requests that account")
+    public void anActorRequestsThatAccount() {
+        new Thread(() -> {
+            var result = service.getAccount(this.account.getId());
+            getAccount.complete(result);
+        }).start();
+    }
+
+    @Then("a {string} event for an account with that id is sent to the service")
+    public void aEventForAnAccountWithThatIdIsSentToTheService(String eventName) {
+        Event event = new Event(eventName, new Object[] { this.account.getId() });
+        assertEquals(event,publishedEvent.join());
+    }
+
+    @Then("no account is found")
+    public void noAccountIsFound() {
+        DTUPayAccount resultingAccount = getAccount.join();
+        assertEquals("", resultingAccount.getId());
+        assertEquals("", resultingAccount.getAccountNumber());
+        assertEquals("", resultingAccount.getFirstName());
+        assertEquals("", resultingAccount.getLastName());
+        assertEquals("", resultingAccount.getCprNumber());
+    }
+
+    @When("the {string} event is returned with no account found")
+    public void theEventIsReturnedWithNoAccountFound(String eventName) {
+        this.result = new DTUPayAccount("", "", "", "");
+        this.result.setId("");
+        service.handleAccountNotFound(new Event("..", new Object[] { this.result }));
+    }
 }
