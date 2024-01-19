@@ -13,7 +13,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import messaging.Event;
 import messaging.MessageQueue;
-
+/*Author Marian s233481 and Sandra s233484*/
 public class MerchantSteps {
 
 	private CompletableFuture<Event> publishedEvent = new CompletableFuture<>();

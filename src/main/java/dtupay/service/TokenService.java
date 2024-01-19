@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 
+/*Author Marian s233481 and Sandra s233484*/
 public class TokenService {
     private MessageQueue queue;
     private Map<CorrelationId, CompletableFuture<String[]>> correlations = new ConcurrentHashMap<>();
@@ -15,7 +16,6 @@ public class TokenService {
     public TokenService(MessageQueue q){
         this.queue = q;
         this.queue.addHandler("GenerateTokenCompleted", this::handleTokenGenComplete);
-
     }
 
     public String[] generateTokens(String account) {

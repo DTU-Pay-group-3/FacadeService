@@ -20,6 +20,7 @@ import java.util.function.Consumer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/*Author Marian s233481 and Sandra s233484*/
 public class PaymentSteps {
 
     private Map<Payment, CompletableFuture<Event>> publishedEvents = new HashMap<>();

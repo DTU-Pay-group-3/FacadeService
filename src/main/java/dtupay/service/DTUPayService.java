@@ -3,6 +3,7 @@ package dtupay.service;
 import messaging.MessageQueue;
 import reporting.service.ReportingService;
 
+/*Author Marian s233481 and Sandra s233484*/
 public class DTUPayService {
 
     private final AccountManagementService accountService;
