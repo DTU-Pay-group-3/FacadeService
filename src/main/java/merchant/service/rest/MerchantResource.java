@@ -5,11 +5,9 @@ import dtupay.service.AccountManagementService;
 import dtupay.service.PaymentService;
 import utils.Payment;
 import utils.ServiceFactory;
+import jakarta.ws.rs.*;
 
-import javax.ws.rs.*;
-
-import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
-
+import static jakarta.ws.rs.core.MediaType.APPLICATION_JSON;
 
 @Path("/merchant")
 public class MerchantResource {

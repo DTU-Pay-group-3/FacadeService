@@ -3,7 +3,6 @@ package dtupay.service;
 import messaging.Event;
 import messaging.MessageQueue;
 import utils.CorrelationId;
-import utils.Payment;
 
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;

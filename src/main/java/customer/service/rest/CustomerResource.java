@@ -3,12 +3,10 @@ package customer.service.rest;
 import customer.service.DTUPayAccount;
 import customer.service.CustomerService;
 import dtupay.service.TokenService;
+import jakarta.ws.rs.*;
 import utils.ServiceFactory;
 
-import javax.ws.rs.*;
-
-import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
-
+import static jakarta.ws.rs.core.MediaType.APPLICATION_JSON;
 
 @Path("/customers")
 public class CustomerResource {

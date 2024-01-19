@@ -12,7 +12,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
 public class CustomerSteps {
     private CompletableFuture<Event> publishedEvent = new CompletableFuture<>();

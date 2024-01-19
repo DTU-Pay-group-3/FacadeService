@@ -3,12 +3,10 @@ package reporting.service.adapter.rest;
 import utils.ServiceFactory;
 import reporting.service.LoggedTransaction;
 import reporting.service.ReportingService;
-
 import java.util.List;
+import jakarta.ws.rs.*;
 
-import javax.ws.rs.*;
-
-import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+import static jakarta.ws.rs.core.MediaType.APPLICATION_JSON;
 
 @Path("/reports")
 public class ReportingResource {
