@@ -1,7 +1,7 @@
 package customer.service.rest;
 
 import customer.service.DTUPayAccount;
-import customer.service.CustomerService;
+import dtupay.service.AccountManagementService;
 import dtupay.service.TokenService;
 
 import utils.ServiceFactory;
@@ -14,18 +14,18 @@ import javax.ws.rs.PathParam;
 @Path("/customers")
 public class CustomerResource {
     // Services
-    CustomerService customerService = new ServiceFactory().getService().getCustomerService();
+    AccountManagementService accountManagementService = new ServiceFactory().getService().getAccountManagementService();
     TokenService tokenService = new ServiceFactory().getService().getTokenService();
 
     @GET
     @Path("/{id}")
     public DTUPayAccount getAccount(@PathParam("id") String id) {
-        return customerService.getAccount(id);
+        return accountManagementService.getAccount(id);
     }
 
     @POST
     public DTUPayAccount registerAccount(DTUPayAccount account) {
-        return customerService.register(account);
+        return accountManagementService.register(account);
     }
 
     @POST

@@ -7,32 +7,46 @@ import messaging.MessageQueue;
 import java.util.concurrent.CompletableFuture;
 
 public class AccountManagementService {
-    MessageQueue queue;
+    private MessageQueue queue;
+    private CompletableFuture<DTUPayAccount> registeredAccount;
+    private CompletableFuture<DTUPayAccount> returnedAccount;
 
-    private CompletableFuture<DTUPayAccount> registeredMerchant;
-
-    public AccountManagementService(MessageQueue q){
-        this.queue = q;
-        this.queue.addHandler("AccountCreated", this::handleRegistrationCompleted);
-        this.queue.addHandler("DTUPayAccountReturned", this::handleAccountAlreadyExists);
+    public AccountManagementService(MessageQueue q) {
+        queue = q;
+        queue.addHandler("AccountCreated", this::handleAccountCreated);
+        queue.addHandler("DTUPayAccountReturned", this::handleAccountReturned);
+        queue.addHandler("AccountAlreadyExists", this::handleAccountAlreadyExists);
     }
 
-    public DTUPayAccount register(DTUPayAccount account){
-        registeredMerchant = new CompletableFuture<>();
+    public DTUPayAccount register(DTUPayAccount account) {
+        registeredAccount = new CompletableFuture<>();
         Event event = new Event("RegisterAccountRequested", new Object[] { account });
-        System.out.println("Event published MerchantRegistrationRequested");
         queue.publish(event);
-        return registeredMerchant.join();
-    }
-    public void  handleRegistrationCompleted(Event event){
-        System.out.println("Event received MerchantAssigned " + event);
-        var s = event.getArgument(0, DTUPayAccount.class);
-        registeredMerchant.complete(s);
+        return registeredAccount.join();
     }
 
-    public void handleAccountAlreadyExists(Event event) {
-        System.out.println("Event received AccountAlreadyExists");
+    public DTUPayAccount handleAccountCreated(Event ev) {
+        var a = ev.getArgument(0, DTUPayAccount.class);
+        registeredAccount.complete(a);
+        return a;
+    }
+
+    private DTUPayAccount handleAccountAlreadyExists(Event event) {
         var a = event.getArgument(0, DTUPayAccount.class);
-        registeredMerchant.complete(a);
+        registeredAccount.complete(a);
+        return a;
+    }
+
+    public DTUPayAccount getAccount(String id) {
+        returnedAccount = new CompletableFuture<>();
+        Event event = new Event("GetDTUPayAccount", new Object[] { id });
+        queue.publish(event);
+        return returnedAccount.join();
+    }
+
+    public DTUPayAccount handleAccountReturned(Event ev) {
+        var a = ev.getArgument(0, DTUPayAccount.class);
+        returnedAccount.complete(a);
+        return a;
     }
 }

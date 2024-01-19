@@ -1,6 +1,5 @@
 package behaviourtests;
 
-import customer.service.CustomerService;
 import customer.service.DTUPayAccount;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;

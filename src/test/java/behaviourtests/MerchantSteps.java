@@ -60,7 +60,7 @@ public class MerchantSteps {
 	public void theEventIsSentWithNonEmptyId(String string) {
 		// This step simulate the event created by a downstream service.
 		var acc = new DTUPayAccount();
-		accountService.handleRegistrationCompleted(new Event("..",new Object[] {acc}));
+		accountService.handleAccountCreated(new Event("..",new Object[] {acc}));
 	}
 
     @Then("the merchant is registered and his id is set")
