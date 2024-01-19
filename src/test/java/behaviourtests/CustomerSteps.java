@@ -1,6 +1,7 @@
 package behaviourtests;
 
 import customer.service.DTUPayAccount;
+import dtupay.service.AccountManagementService;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -27,7 +28,7 @@ public class CustomerSteps {
         }
 
     };
-    private CustomerService service = new CustomerService(q);
+    private AccountManagementService service = new AccountManagementService(q);
     private DTUPayAccount account, result;
     private CompletableFuture<DTUPayAccount> registeredAccount = new CompletableFuture<>();
 
